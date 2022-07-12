@@ -1,18 +1,8 @@
-#    This file is part of the ChannelAutoForwarder distribution (https://github.com/Benchamxd/Telegraph-Uploader).
-#    Copyright (c) 2021 Rithunand
-#    
-#    This program is free software: you can redistribute it and/or modify  
-#    it under the terms of the GNU General Public License as published by  
-#    the Free Software Foundation, version 3.
-# 
-#    This program is distributed in the hope that it will be useful, but 
-#    WITHOUT ANY WARRANTY; without even the implied warranty of 
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
-#    General Public License for more details.
-# 
-#    License can be found in < https://github.com/Benchamxd/Telegraph-Uploader/blob/main/License> 
+ 
+#    License can be found in <https://github.com/lkdevelopers8065/Telegraph-Uploader> 
 
 import os
+import telebot
 from telegraph import upload_file
 import pyrogram
 from pyrogram import filters, Client
@@ -22,6 +12,8 @@ from pyrogram.types import (
     InlineKeyboardMarkup, InlineKeyboardButton,
     CallbackQuery, InlineQuery)
 
+bot = telebot.TeleBot("5457677394:AAGjtXl3roSTlENej8EA5Ycjro81XhZ_wyE")
+
 Tgraph = Client(
    "Telegra.ph Uploader",
    api_id=Config.APP_ID,
@@ -29,13 +21,17 @@ Tgraph = Client(
    bot_token=Config.TG_BOT_TOKEN,
 )
 
+@bot.message_handler(commands=["start"])
+def send_welcome(message):
+  bot.reply_to(message, "https://t.me/lkdevelopers_org/51")
+
 @Tgraph.on_message(filters.photo)
 async def uploadphoto(client, message):
-  msg = await message.reply_text("`Tʀʏɪɴɢ Tᴏ Dᴏᴡɴʟᴏᴀᴅ`")
+  msg = await message.reply_text("🐋 ⋆ 🐤 `𝙏ʀʏɪɴɢ Ͳᴏ ɖᴏᴡɴʟᴏᴀᴅ` 🐤 ⋆ 🐋")
   userid = str(message.chat.id)
   img_path = (f"./DOWNLOADS/{userid}.jpg")
   img_path = await client.download_media(message=message, file_name=img_path)
-  await msg.edit_text("`Tʀʏɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ.....`")
+  await msg.edit_text("✌🍬  `𝑻ʀʏɪɴɢ 𝑻ᴏ 𝑼𝒑𝒍𝒐𝒂𝒅`  ൠ☜")
   try:
     tlink = upload_file(img_path)
   except:
@@ -47,11 +43,11 @@ async def uploadphoto(client, message):
 @Tgraph.on_message(filters.animation)
 async def uploadgif(client, message):
   if(message.animation.file_size < 5242880):
-    msg = await message.reply_text("`Tʀʏɪɴɢ Tᴏ Dᴏᴡɴʟᴏᴀᴅ`")
+    msg = await message.reply_text("🐋 ⋆ 🐤 `𝙏ʀʏɪɴɢ Ͳᴏ ɖᴏᴡɴʟᴏᴀᴅ` 🐤 ⋆ 🐋")
     userid = str(message.chat.id)
     gif_path = (f"./DOWNLOADS/{userid}.mp4")
     gif_path = await client.download_media(message=message, file_name=gif_path)
-    await msg.edit_text("`Tʀʏɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ.....`")
+    await msg.edit_text("✌🍬  `𝑻ʀʏɪɴɢ 𝑻ᴏ 𝑼𝒑𝒍𝒐𝒂𝒅`  ൠ☜")
     try:
       tlink = upload_file(gif_path)
       await msg.edit_text(f"https://telegra.ph{tlink[0]}")   
@@ -64,11 +60,11 @@ async def uploadgif(client, message):
 @Tgraph.on_message(filters.video)
 async def uploadvid(client, message):
   if(message.video.file_size < 5242880):
-    msg = await message.reply_text("`Tʀʏɪɴɢ Tᴏ Dᴏᴡɴʟᴏᴀᴅ`")
+    msg = await message.reply_text("🐋 ⋆ 🐤 `𝙏ʀʏɪɴɢ Ͳᴏ ɖᴏᴡɴʟᴏᴀᴅ` 🐤 ⋆ 🐋")
     userid = str(message.chat.id)
     vid_path = (f"./DOWNLOADS/{userid}.mp4")
     vid_path = await client.download_media(message=message, file_name=vid_path)
-    await msg.edit_text("`Tʀʏɪɴɢ Tᴏ Uᴘʟᴏᴀᴅ.....`")
+    await msg.edit_text("✌🍬  `𝑻ʀʏɪɴɢ 𝑻ᴏ 𝑼𝒑𝒍𝒐𝒂𝒅`  ൠ☜")
     try:
       tlink = upload_file(vid_path)
       await msg.edit_text(f"https://telegra.ph{tlink[0]}")     
@@ -85,7 +81,7 @@ async def home(client, message):
         InlineKeyboardButton('Close', callback_data='close')
     ],
     [
-        InlineKeyboardButton('Our Channel', url='http://telegram.me/lkdeveloper'),
+        InlineKeyboardButton('Our Channel', url='http://telegram.me/lkdevelopers_org'),
         InlineKeyboardButton('Source Code', url='https://github.com/lkdevelopers8065/Telegraph-Uploader')
     ]]
   reply_markup = InlineKeyboardMarkup(buttons)
@@ -110,7 +106,7 @@ async def help(client, message):
         InlineKeyboardButton('Close', callback_data='close')
     ],
     [
-        InlineKeyboardButton('Our Channel', url='http://telegram.me/lkdeveloper')
+        InlineKeyboardButton('Our Channel', url='http://telegram.me/lkdevelopers_org')
     ]]
   reply_markup = InlineKeyboardMarkup(buttons)
   await Tgraph.send_message(
