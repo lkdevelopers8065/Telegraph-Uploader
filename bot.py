@@ -2,7 +2,6 @@
 #    License can be found in <https://github.com/lkdevelopers8065/Telegraph-Uploader> 
 
 import os
-import telebot
 from telegraph import upload_file
 import pyrogram
 from pyrogram import filters, Client
@@ -12,18 +11,12 @@ from pyrogram.types import (
     InlineKeyboardMarkup, InlineKeyboardButton,
     CallbackQuery, InlineQuery)
 
-bot = telebot.TeleBot("5457677394:AAGjtXl3roSTlENej8EA5Ycjro81XhZ_wyE")
-
 Tgraph = Client(
    "Telegra.ph Uploader",
    api_id=Config.APP_ID,
    api_hash=Config.API_HASH,
    bot_token=Config.TG_BOT_TOKEN,
 )
-
-@bot.message_handler(commands=["start"])
-def send_welcome(message):
-  bot.reply_to(message, "https://t.me/lkdevelopers_org/51")
 
 @Tgraph.on_message(filters.photo)
 async def uploadphoto(client, message):
